@@ -23,7 +23,17 @@ dist-ssr
 *.sln
 *.sw?
 
+*.env
+
 .claude
 .cursor
 .devin
 .agents
+
+.DS_Store
+Thumbs.db
+dist/
+build/
+
+src/generated/
+generated/
