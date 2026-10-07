@@ -1,26 +1,18 @@
-import prisma from "./lib/prisma.js";
+import { ApolloServer } from "@apollo/server";
+import { startStandaloneServer } from "@apollo/server/standalone";
 
-async function main(){
-    const users = await prisma.user.findMany();
+import { typeDefs } from "./graphql/schema.js";
+import { resolvers } from "./graphql/resolvers.js";
 
-    console.log(users)
-}
-
-main().catch(console.error).finally(async()=>{
-    await prisma.$disconnect();
+const server= new ApolloServer({
+    typeDefs,
+    resolvers,
 })
 
+const {url} = await startStandaloneServer(server, {
+    listen:{
+        port:3000
+    }
+})
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+console.log(`Server up and running at ${url}`)
